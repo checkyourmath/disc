@@ -16,7 +16,7 @@ const formSchema = z.object({
   }),
   imageUrl: z.string().min(1, {
     message: "Server image is required"
-  })
+  }),
 });
 
 export const InitialModal = () => {
