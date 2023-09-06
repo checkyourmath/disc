@@ -31,5 +31,5 @@ export const initialProfile = async (): Promise<Profile | null> => {
   });
 
   return newProfile;
-}
+};
 

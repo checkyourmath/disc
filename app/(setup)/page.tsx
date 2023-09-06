@@ -23,6 +23,6 @@ const SetupPage = async () => {
   return (
     <InitialModal />
   );
-}
+};
 
 export default SetupPage;
