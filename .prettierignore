@@ -7,5 +7,6 @@ coverage
 deploy
 dist
 node_modules
+build
 
 **/*.json
