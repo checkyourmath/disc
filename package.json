@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "precommit": "npm run lint"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.4",
