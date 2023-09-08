@@ -7,13 +7,13 @@ import "@uploadthing/react/styles.css";
 
 import { UploadEndpoint } from "@/app/api/uploadthing/enums/upload-enpoint.enum";
 
-type TFileUploadProps = {
+type FileUploadProps = {
   onChange: (url?: string) => void;
   value: string;
   endpoint: UploadEndpoint;
 };
 
-export const FileUpload = ({ onChange, value, endpoint }: TFileUploadProps) => {
+export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
   const fileType = (value?.split(".").pop() || "").toLowerCase();
 
   if (fileType && fileType !== "pdf") {
