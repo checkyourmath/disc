@@ -4,24 +4,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 // TODO: use types from @radix-ui?
 
-export enum TooltipSide {
-  TOP = "top",
-  RIGHT = "right",
-  BOTTOM = "bottom",
-  LEFT = "left"
-}
-
-export enum TooltipAlign {
-  START = "start",
-  CENTER = "center",
-  END = "end"
-}
-
 export type ActionTooltipProps = {
   label: string;
   children: React.ReactNode;
-  side?: TooltipSide;
-  align?: TooltipAlign;
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
 };
 
 export const ActionTooltip = ({ label, children, side, align }: ActionTooltipProps) => {

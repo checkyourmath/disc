@@ -4,7 +4,7 @@ import { useParams /* , useRouter */ } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ActionTooltip, TooltipAlign, TooltipSide } from "@/components/action-tooltip";
+import { ActionTooltip } from "@/components/action-tooltip";
 import { cn } from "@/lib/utils";
 
 export type NavigationItemProps = {
@@ -23,8 +23,8 @@ export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
 
   return (
     <ActionTooltip
-      side={TooltipSide.RIGHT}
-      align={TooltipAlign.CENTER}
+      side="right"
+      align="center"
       label={name}
     >
       {/*<button*/}
