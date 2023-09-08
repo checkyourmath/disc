@@ -1,9 +1,9 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import ActionTooltip, { TooltipAlign, TooltipSide } from "@/components/action-tooltip";
+import { ActionTooltip, TooltipAlign, TooltipSide } from "@/components/action-tooltip";
 
-const NavigationAction = () => {
+export const NavigationAction = () => {
   return (
     <div>
       <ActionTooltip
@@ -26,5 +26,3 @@ const NavigationAction = () => {
     </div>
   );
 };
-
-export default NavigationAction;

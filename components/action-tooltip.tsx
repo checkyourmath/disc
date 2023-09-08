@@ -17,14 +17,14 @@ export enum TooltipAlign {
   END = "end"
 }
 
-type ActionTooltipProps = {
+export type ActionTooltipProps = {
   label: string;
   children: React.ReactNode;
   side?: TooltipSide;
   align?: TooltipAlign;
 };
 
-const ActionTooltip = ({ label, children, side, align }: ActionTooltipProps) => {
+export const ActionTooltip = ({ label, children, side, align }: ActionTooltipProps) => {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={50}>
@@ -39,5 +39,3 @@ const ActionTooltip = ({ label, children, side, align }: ActionTooltipProps) => 
     </TooltipProvider>
   );
 };
-
-export default ActionTooltip;

@@ -62,7 +62,8 @@ export const InitialModal = () => {
       router.refresh();
       window.location.reload();
     } catch (error) {
-      console.log("error", error);
+      // TODO: handle error
+      // console.log("error", error);
     }
   };
 

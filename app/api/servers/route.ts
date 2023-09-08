@@ -32,7 +32,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(server);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log("[SERVERS_POST]", error);
+
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

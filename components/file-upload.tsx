@@ -7,7 +7,7 @@ import "@uploadthing/react/styles.css";
 
 import { UploadEndpoint } from "@/app/api/uploadthing/enums/upload-enpoint.enum";
 
-type FileUploadProps = {
+export type FileUploadProps = {
   onChange: (url?: string) => void;
   value: string;
   endpoint: UploadEndpoint;
@@ -44,7 +44,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
       }}
       onUploadError={
         (/* error */) => {
-          // TODO: removeme
+          // TODO: handle error
           // console.log("");
           // console.log("onUploadError");
           // console.log("error", error);
