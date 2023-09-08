@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { UploadEndpoint } from "@/app/api/uploadthing/enums/upload-enpoint.enum";
 
 const f = createUploadthing();
 
@@ -38,11 +39,12 @@ const handleAuth = () => {
 //     }),
 // } satisfies FileRouter;
 
+// TODO: is there a typedef for ourFileRouter?
 export const ourFileRouter = {
-  serverImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+  [UploadEndpoint.SERVER_IMAGE]: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     .middleware(() => handleAuth())
     .onUploadComplete(() => {}),
-  messageFiled: f(["image", "pdf" /* , "video", "audio", "text", "blob" */])
+  [UploadEndpoint.MESSAGE_FIELD]: f(["image", "pdf" /* , "video", "audio", "text", "blob" */])
     .middleware(() => handleAuth())
     .onUploadComplete(() => {})
 } satisfies FileRouter;
