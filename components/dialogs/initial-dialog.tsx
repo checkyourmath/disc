@@ -37,7 +37,7 @@ const formSchema = z.object({
   })
 });
 
-export const InitialModal = () => {
+export const InitialDialog = () => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
