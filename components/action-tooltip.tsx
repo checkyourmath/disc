@@ -1,7 +1,15 @@
 "use client";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Align, Side } from "@radix-ui/react-popper/dist";
+
+// TODO: use types from @radix-ui?
+
+export enum TooltipSide {
+  TOP = "top",
+  RIGHT = "right",
+  BOTTOM = "bottom",
+  LEFT = "left"
+}
 
 export enum TooltipAlign {
   START = "start",
@@ -12,8 +20,8 @@ export enum TooltipAlign {
 type ActionTooltipProps = {
   label: string;
   children: React.ReactNode;
-  side?: Side;
-  align?: Align;
+  side?: TooltipSide;
+  align?: TooltipAlign;
 };
 
 const ActionTooltip = ({ label, children, side, align }: ActionTooltipProps) => {

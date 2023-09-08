@@ -1,14 +1,14 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import ActionTooltip from "@/components/action-tooltip";
+import ActionTooltip, { TooltipAlign, TooltipSide } from "@/components/action-tooltip";
 
 const NavigationAction = () => {
   return (
     <div>
       <ActionTooltip
-        side="right"
-        align="center"
+        side={TooltipSide.RIGHT}
+        align={TooltipAlign.CENTER}
         label="Create a Server"
       >
         <button
