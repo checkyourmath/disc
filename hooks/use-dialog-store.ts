@@ -4,16 +4,18 @@ export enum DialogType {
   CREATE_SERVER = "create-server"
 }
 
+// TODO: improve names?
+
 export type DialogStore = {
-  type: DialogType | null;
-  isOpen: boolean;
-  open: (type: DialogType) => void;
-  close: () => void;
+  dialogType: DialogType | null;
+  isDialogOpen: boolean;
+  dialogOpen: (type: DialogType) => void;
+  dialogClose: () => void;
 };
 
 export const useDialog = create<DialogStore>((set) => ({
-  type: null,
-  isOpen: false,
-  open: (type) => set({ type, isOpen: true }),
-  close: () => set({ type: null, isOpen: false })
+  dialogType: null,
+  isDialogOpen: false,
+  dialogOpen: (type) => set({ dialogType: type, isDialogOpen: true }),
+  dialogClose: () => set({ dialogType: null, isDialogOpen: false })
 }));

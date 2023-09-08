@@ -38,10 +38,8 @@ const formSchema = z.object({
 });
 
 export const CreateServerDialog = () => {
-  const { type, isOpen, close } = useDialog();
+  const { dialogType, isDialogOpen, dialogClose } = useDialog();
   const router = useRouter();
-
-  const isDialogOpen = isOpen && type === DialogType.CREATE_SERVER;
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -51,10 +49,11 @@ export const CreateServerDialog = () => {
     }
   });
   const isLoading = form.formState.isSubmitting;
+  const isOpen = isDialogOpen && dialogType === DialogType.CREATE_SERVER;
 
   const handleOpenChange = () => {
     form.reset();
-    close();
+    dialogClose();
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -63,6 +62,7 @@ export const CreateServerDialog = () => {
 
       form.reset();
       router.refresh();
+      dialogClose();
     } catch (error) {
       // TODO: handle error
       // console.log("error", error);
@@ -71,7 +71,7 @@ export const CreateServerDialog = () => {
 
   return (
     <Dialog
-      open={isDialogOpen}
+      open={isOpen}
       onOpenChange={handleOpenChange}
     >
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
