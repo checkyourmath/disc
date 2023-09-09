@@ -7,6 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { DialogType, useDialog } from "@/hooks/use-dialog-store";
+import { GENERAL_CHANNEL_NAME } from "@/lib/constants";
 
 type ServerChannelProps = {
   channel: Channel;
@@ -57,7 +58,7 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
       >
         {channel.name}
       </p>
-      {channel.name !== "General" && role !== MemberRole.GUEST && (
+      {channel.name !== GENERAL_CHANNEL_NAME && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <Edit
@@ -73,7 +74,7 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
           </ActionTooltip>
         </div>
       )}
-      {channel.name === "General" && (
+      {channel.name === GENERAL_CHANNEL_NAME && (
         <Lock className="ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400" />
       )}
     </button>

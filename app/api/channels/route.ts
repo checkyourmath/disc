@@ -3,6 +3,7 @@ import { MemberRole } from "@prisma/client";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { GENERAL_CHANNEL_NAME } from "@/lib/constants";
 
 export async function POST(req: Request) {
   try {
@@ -20,8 +21,8 @@ export async function POST(req: Request) {
       return new NextResponse("Server ID missing", { status: 400 });
     }
 
-    if (name === "General") {
-      return new NextResponse("Name cannot be 'General'", { status: 400 });
+    if (name === GENERAL_CHANNEL_NAME) {
+      return new NextResponse(`Name cannot be "${GENERAL_CHANNEL_NAME}"`, { status: 400 });
     }
 
     const server = await db.server.update({

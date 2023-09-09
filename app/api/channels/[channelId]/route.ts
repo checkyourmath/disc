@@ -3,6 +3,7 @@ import { MemberRole } from "@prisma/client";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { GENERAL_CHANNEL_NAME } from "@/lib/constants";
 
 export async function DELETE(req: Request, { params }: { params: { channelId: string } }) {
   try {
@@ -40,7 +41,7 @@ export async function DELETE(req: Request, { params }: { params: { channelId: st
           delete: {
             id: params.channelId,
             name: {
-              not: "General"
+              not: GENERAL_CHANNEL_NAME
             }
           }
         }
@@ -76,8 +77,8 @@ export async function PATCH(req: Request, { params }: { params: { channelId: str
       return new NextResponse("Channel ID missing", { status: 400 });
     }
 
-    if (name === "General") {
-      return new NextResponse("Name cannot be 'general'", { status: 400 });
+    if (name === GENERAL_CHANNEL_NAME) {
+      return new NextResponse(`Name cannot be "${GENERAL_CHANNEL_NAME}"`, { status: 400 });
     }
 
     const server = await db.server.update({
@@ -98,7 +99,7 @@ export async function PATCH(req: Request, { params }: { params: { channelId: str
             where: {
               id: params.channelId,
               NOT: {
-                name: "General"
+                name: GENERAL_CHANNEL_NAME
               }
             },
             data: {

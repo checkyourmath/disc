@@ -3,6 +3,7 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { MemberRole } from "@prisma/client";
+import { GENERAL_CHANNEL_NAME } from "@/lib/constants";
 
 export async function POST(request: Request) {
   try {
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
         imageUrl,
         inviteCode,
         channels: {
-          create: [{ name: "General", profileId: profile.id }]
+          create: [{ name: GENERAL_CHANNEL_NAME, profileId: profile.id }]
         },
         members: {
           create: [{ profileId: profile.id, role: MemberRole.ADMIN }]

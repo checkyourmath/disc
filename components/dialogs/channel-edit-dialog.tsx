@@ -34,6 +34,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { GENERAL_CHANNEL_NAME } from "@/lib/constants";
 
 const formSchema = z.object({
   name: z
@@ -41,8 +42,8 @@ const formSchema = z.object({
     .min(1, {
       message: "Channel name is required."
     })
-    .refine((name) => name !== "general", {
-      message: "Channel name cannot be 'general'"
+    .refine((name) => name !== GENERAL_CHANNEL_NAME, {
+      message: `Channel name cannot be ${GENERAL_CHANNEL_NAME}`
     }),
   type: z.nativeEnum(ChannelType)
 });

@@ -1,4 +1,4 @@
-import { SignIn } from "@clerk/nextjs";
+import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
@@ -15,8 +15,7 @@ const InviteCodePage = async ({ params: { inviteCode } }: InviteCodePageProps) =
   const profile = await currentProfile();
 
   if (!profile) {
-    // return redirectToSignIn(); // <- causes error
-    return <SignIn />;
+    return redirectToSignIn();
   }
 
   if (!inviteCode) {
