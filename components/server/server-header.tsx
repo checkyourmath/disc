@@ -1,7 +1,17 @@
 "use client";
 
 import { MemberRole } from "@prisma/client";
-import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
+import {
+  ChevronDown,
+  LogOut,
+  PlusCircle,
+  Settings,
+  ShieldAlert,
+  ShieldCheck,
+  Trash,
+  UserPlus,
+  Users
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +21,33 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DialogType, useDialog } from "@/hooks/use-dialog-store";
 import { ServerWithMembersWithProfile } from "@/types";
+import { ActionTooltip } from "@/components/action-tooltip";
 
 export type ServerHeaderProps = {
   server: ServerWithMembersWithProfile;
   role: MemberRole;
+};
+
+const roleIconMap = {
+  [MemberRole.GUEST]: null,
+  [MemberRole.MODERATOR]: (
+    <ActionTooltip
+      side="right"
+      align="center"
+      label="You have Moderator role"
+    >
+      <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />
+    </ActionTooltip>
+  ),
+  [MemberRole.ADMIN]: (
+    <ActionTooltip
+      side="right"
+      align="center"
+      label="You have Administrator role"
+    >
+      <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />
+    </ActionTooltip>
+  )
 };
 
 export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
@@ -34,6 +67,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
           className="w-full text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2 hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition"
         >
           {server.name}
+          {roleIconMap[role]}
           <ChevronDown className="h-5 w-5 ml-auto" />
         </button>
       </DropdownMenuTrigger>
