@@ -9,7 +9,7 @@ import { ChannelType } from "@prisma/client";
 interface ChatHeaderProps {
   serverId: string;
   name: string;
-  channelType: ChannelType;
+  channelType?: ChannelType;
   type: "channel" | "conversation";
   imageUrl?: string;
 }
@@ -24,7 +24,7 @@ export const ChatHeader = ({ serverId, name, channelType, type, imageUrl }: Chat
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2">
       <MobileToggle serverId={serverId} />
-      {type === "channel" && iconMap[channelType]}
+      {type === "channel" && channelType && iconMap[channelType]}
       {type === "conversation" && (
         <UserAvatar
           src={imageUrl}
