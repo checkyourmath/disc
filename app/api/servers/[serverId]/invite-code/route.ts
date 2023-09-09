@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
@@ -19,7 +19,8 @@ export async function PATCH(request: Request, { params }: { params: { serverId: 
     const server = await db.server.update({
       where: {
         id: params.serverId,
-        profileId: profile.id
+        // TODO: check all members with Admin role
+        profileId: profile.id // creator id = admin id
       },
       data: {
         inviteCode: uuidv4()
@@ -29,7 +30,7 @@ export async function PATCH(request: Request, { params }: { params: { serverId: 
     return NextResponse.json(server);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log("[SERVER_ID]", error);
+    console.log("[SERVERS_SERVER_ID_INVITE_CODE_PATCH]", error);
 
     return new NextResponse("Internal Error", { status: 500 });
   }

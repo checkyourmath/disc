@@ -6,9 +6,7 @@ export const initialProfile = async (): Promise<Profile | null> => {
   const user = await currentUser();
 
   if (!user) {
-    // return redirectToSignIn();
-    redirectToSignIn();
-    return null;
+    return redirectToSignIn();
   }
 
   const profile = await db.profile.findUnique({
@@ -24,7 +22,7 @@ export const initialProfile = async (): Promise<Profile | null> => {
   const newProfile = await db.profile.create({
     data: {
       userId: user.id,
-      name: (`${user.firstName} ${user.lastName}`).trim(),
+      name: `${user.firstName} ${user.lastName}`.trim(),
       imageUrl: user.imageUrl,
       email: user.emailAddresses[0].emailAddress
     }
@@ -32,4 +30,3 @@ export const initialProfile = async (): Promise<Profile | null> => {
 
   return newProfile;
 };
-

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { Server } from "@prisma/client";
 import { Check, Copy, RefreshCw } from "lucide-react";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -38,7 +39,7 @@ export const InvitePeopleDialog = () => {
   const onGenerateNewLink = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.patch(`/api/servers/${server?.id}/invite-code`);
+      const response = await axios.patch<Server>(`/api/servers/${server?.id}/invite-code`);
 
       openDialog(DialogType.SERVER_INVITE_PEOPLE, { server: response.data });
     } catch (error) {
