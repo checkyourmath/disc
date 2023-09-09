@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { ChannelType } from "@prisma/client";
 import { ServerWithMembersWithProfile } from "@/types";
 
 export enum DialogType {
@@ -13,6 +14,7 @@ export enum DialogType {
 
 export type DialogData = {
   server?: ServerWithMembersWithProfile;
+  channelType?: ChannelType;
 };
 
 export type DialogStore = {
