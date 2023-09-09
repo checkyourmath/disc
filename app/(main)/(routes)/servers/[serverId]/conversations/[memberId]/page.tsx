@@ -5,11 +5,12 @@ import { db } from "@/lib/db";
 import { getOrCreateConversation } from "@/lib/conversation";
 import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
+import { MediaRoom } from "@/components/media-room";
 // import { ChatMessages } from "@/components/chat/chat-messages";
 // import { ChatInput } from "@/components/chat/chat-input";
 // import { MediaRoom } from "@/components/media-room";
 
-interface MemberIdPageProps {
+type MemberIdPageProps = {
   params: {
     memberId: string;
     serverId: string;
@@ -17,12 +18,9 @@ interface MemberIdPageProps {
   searchParams: {
     video?: boolean;
   };
-}
+};
 
-const MemberIdPage = async ({
-  params
-}: // searchParams,
-MemberIdPageProps) => {
+const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
   const profile = await currentProfile();
 
   if (!profile) {
@@ -61,13 +59,13 @@ MemberIdPageProps) => {
         serverId={params.serverId}
         type="conversation"
       />
-      {/*{searchParams.video && (*/}
-      {/*  <MediaRoom*/}
-      {/*    chatId={conversation.id}*/}
-      {/*    video={true}*/}
-      {/*    audio={true}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {searchParams.video && (
+        <MediaRoom
+          chatId={conversation.id}
+          video={true}
+          audio={true}
+        />
+      )}
       {/*{!searchParams.video && (*/}
       {/*  <>*/}
       {/*    <ChatMessages*/}

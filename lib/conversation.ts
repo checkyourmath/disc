@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
 
 export const getOrCreateConversation = async (memberOneId: string, memberTwoId: string) => {
+  // TODO: possible improvement - run both find in parallel
+
   let conversation =
     (await findConversation(memberOneId, memberTwoId)) ||
     (await findConversation(memberTwoId, memberOneId));

@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { DialogProvider } from "@/components/providers/dialog-provider";
+import { SocketProvider } from "@/components/providers/socket-provider";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -27,8 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             enableSystem={false}
             storageKey="disc-theme"
           >
-            <DialogProvider />
-            {children}
+            <SocketProvider>
+              <DialogProvider />
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
