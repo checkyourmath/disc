@@ -50,14 +50,14 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
       {iconMap[channel.type]}
       <p
         className={cn(
-          "line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
+          "line-clamp-1 text-left font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
           params?.channelId === channel.id &&
             "text-primary dark:text-zinc-200 dark:group-hover:text-white"
         )}
       >
         {channel.name}
       </p>
-      {channel.name !== "general" && role !== MemberRole.GUEST && (
+      {channel.name !== "General" && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <Edit
@@ -73,7 +73,7 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
           </ActionTooltip>
         </div>
       )}
-      {channel.name === "general" && (
+      {channel.name === "General" && (
         <Lock className="ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400" />
       )}
     </button>
