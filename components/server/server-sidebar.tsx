@@ -80,7 +80,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
     }
   });
 
-  const members = server.members.filter((member) => member.profileId !== profile.id);
+  const members = server.members; // server.members.filter((member) => member.profileId !== profile.id);
   const role =
     server.members.find((member) => member.profileId === profile.id)?.role || MemberRole.GUEST;
 
