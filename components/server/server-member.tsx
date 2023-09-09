@@ -2,7 +2,8 @@
 
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
@@ -19,17 +20,13 @@ const roleIconMap = {
 
 export const ServerMember = ({ member }: ServerMemberProps) => {
   const params = useParams();
-  const router = useRouter();
 
   const icon = roleIconMap[member.role];
-
-  const onClick = () => {
-    router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
-  };
+  const url = `/servers/${params?.serverId}/conversations/${member.id}`;
 
   return (
-    <button
-      onClick={onClick}
+    <Link
+      href={url}
       className={cn(
         "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
         params?.memberId === member.id && "bg-zinc-700/20 dark:bg-zinc-700"
@@ -49,6 +46,6 @@ export const ServerMember = ({ member }: ServerMemberProps) => {
         {member.profile.name}
       </p>
       {icon}
-    </button>
+    </Link>
   );
 };

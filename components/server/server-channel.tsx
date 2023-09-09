@@ -2,12 +2,13 @@
 
 import { Channel, ChannelType, MemberRole, Server } from "@prisma/client";
 import { Edit, Hash, Lock, Mic, Trash, Video } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { DialogType, useDialog } from "@/hooks/use-dialog-store";
 import { GENERAL_CHANNEL_NAME } from "@/lib/constants";
+import Link from "next/link";
 
 type ServerChannelProps = {
   channel: Channel;
@@ -26,13 +27,8 @@ const iconMap = {
 export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => {
   const { openDialog } = useDialog();
   const params = useParams();
-  const router = useRouter();
 
-  // const Icon = iconMap[channel.type];
-
-  const onClick = () => {
-    router.push(`/servers/${params?.serverId}/channels/${channel.id}`);
-  };
+  const url = `/servers/${params?.serverId}/channels/${channel.id}`;
 
   const onAction = (e: React.MouseEvent, dialogType: DialogType) => {
     e.stopPropagation();
@@ -40,9 +36,8 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
   };
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
+    <Link
+      href={url}
       className={cn(
         "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
         params?.channelId === channel.id && "bg-zinc-700/20 dark:bg-zinc-700"
@@ -77,6 +72,6 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
       {channel.name === GENERAL_CHANNEL_NAME && (
         <Lock className="ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400" />
       )}
-    </button>
+    </Link>
   );
 };
