@@ -1,8 +1,8 @@
 "use client";
 
-import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 
 import {
   CommandDialog,
@@ -26,24 +26,25 @@ export type ServerSearchProps = {
 };
 
 export const ServerSearch = ({ data }: ServerSearchProps) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const params = useParams();
 
   useEffect(() => {
-    const down = (e: KeyboardEvent) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setIsOpen((open) => !open);
       }
     };
 
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const onClick = ({ id, type }: { id: string; type: "channel" | "member" }) => {
-    setOpen(false);
+  const onItemClick = ({ id, type }: { id: string; type: "channel" | "member" }) => {
+    setIsOpen(false);
 
     if (type === "member") {
       return router.push(`/servers/${params?.serverId}/conversations/${id}`);
@@ -57,7 +58,8 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        type="button"
+        onClick={() => setIsOpen(true)}
         className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition"
       >
         <Search className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
@@ -69,8 +71,8 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
         </kbd>
       </button>
       <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
+        open={isOpen}
+        onOpenChange={setIsOpen}
       >
         <CommandInput placeholder="Search all channels and members" />
         <CommandList>
@@ -87,7 +89,7 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
                   return (
                     <CommandItem
                       key={id}
-                      onSelect={() => onClick({ id, type })}
+                      onSelect={() => onItemClick({ id, type })}
                     >
                       {icon}
                       <span>{name}</span>
