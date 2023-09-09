@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
+import { Server } from "@prisma/client";
 
 type InviteCodePageProps = {
   params: {
@@ -37,20 +38,26 @@ const InviteCodePage = async ({ params: { inviteCode } }: InviteCodePageProps) =
     return redirect(`/servers/${existingServer.id}`);
   }
 
-  const server = await db.server.update({
-    where: {
-      inviteCode
-    },
-    data: {
-      members: {
-        create: [
-          {
-            profileId: profile.id
-          }
-        ]
+  let server: Server = null;
+
+  try {
+    server = await db.server.update({
+      where: {
+        inviteCode
+      },
+      data: {
+        members: {
+          create: [
+            {
+              profileId: profile.id
+            }
+          ]
+        }
       }
-    }
-  });
+    });
+  } catch {
+    /* ignore for now */
+  }
 
   if (server) {
     return redirect(`/servers/${server.id}`);
