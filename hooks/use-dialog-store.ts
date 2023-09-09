@@ -11,18 +11,32 @@ export enum DialogType {
   SERVER_LEAVE = "server-leave"
 }
 
-// TODO: improve names?
+export type DialogData = {
+  server?: Server;
+};
 
 export type DialogStore = {
   dialogType: DialogType | null;
+  dialogData: DialogData;
   isDialogOpen: boolean;
-  openDialog: (type: DialogType, params?: { server?: Server }) => void;
+  openDialog: (dialogType: DialogType, dialogData?: DialogData) => void;
   closeDialog: () => void;
 };
 
 export const useDialog = create<DialogStore>((set) => ({
   dialogType: null,
+  dialogData: {},
   isDialogOpen: false,
-  openDialog: (type) => set({ dialogType: type, isDialogOpen: true }),
-  closeDialog: () => set({ dialogType: null, isDialogOpen: false })
+  openDialog: (dialogType, dialogData = {}) =>
+    set({
+      dialogType,
+      dialogData,
+      isDialogOpen: true
+    }),
+  closeDialog: () =>
+    set({
+      dialogType: null,
+      dialogData: {},
+      isDialogOpen: false
+    })
 }));
