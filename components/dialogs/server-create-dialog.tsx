@@ -37,7 +37,7 @@ const formSchema = z.object({
   })
 });
 
-export const CreateServerDialog = () => {
+export const ServerCreateDialog = () => {
   const { dialogType, isDialogOpen, closeDialog } = useDialog();
   const router = useRouter();
 

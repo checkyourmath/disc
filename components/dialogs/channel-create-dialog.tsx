@@ -47,7 +47,7 @@ const formSchema = z.object({
   type: z.nativeEnum(ChannelType)
 });
 
-export const CreateChannelDialog = () => {
+export const ChannelCreateDialog = () => {
   const { isDialogOpen, closeDialog, dialogType, dialogData } = useDialog();
   const router = useRouter();
   const params = useParams();

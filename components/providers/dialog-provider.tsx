@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CreateServerDialog } from "@/components/dialogs/create-server-dialog";
+import { ServerCreateDialog } from "@/components/dialogs/server-create-dialog";
 import { InvitePeopleDialog } from "@/components/dialogs/invite-people-dialog";
 import { ServerSettingsDialog } from "@/components/dialogs/server-settings-dialog";
 import { ManageMembersDialog } from "@/components/dialogs/manage-members-dialog";
-import { CreateChannelDialog } from "@/components/dialogs/create-channel-dialog";
+import { ChannelCreateDialog } from "@/components/dialogs/channel-create-dialog";
 import { LeaveServerDialog } from "@/components/dialogs/leave-server-dialog";
-import { DeleteServerDialog } from "@/components/dialogs/delete-server-dialog";
+import { ServerDeleteDialog } from "@/components/dialogs/server-delete-dialog";
+import { ChannelDeleteDialog } from "@/components/dialogs/channel-delete-dialog";
+import { ChannelEditDialog } from "@/components/dialogs/channel-edit-dialog";
 
 export const DialogProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -22,13 +24,15 @@ export const DialogProvider = () => {
 
   return (
     <>
-      <CreateServerDialog />
+      <ServerCreateDialog />
       <InvitePeopleDialog />
       <ServerSettingsDialog />
       <ManageMembersDialog />
-      <CreateChannelDialog />
+      <ChannelCreateDialog />
       <LeaveServerDialog />
-      <DeleteServerDialog />
+      <ServerDeleteDialog />
+      <ChannelDeleteDialog />
+      <ChannelEditDialog />
     </>
   );
 };
