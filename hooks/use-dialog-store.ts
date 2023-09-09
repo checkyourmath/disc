@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Server } from "@prisma/client";
+import { ServerWithMembersWithProfile } from "@/types";
 
 export enum DialogType {
   CREATE_SERVER = "create-server",
@@ -12,7 +12,7 @@ export enum DialogType {
 }
 
 export type DialogData = {
-  server?: Server;
+  server?: ServerWithMembersWithProfile;
 };
 
 export type DialogStore = {

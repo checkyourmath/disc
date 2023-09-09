@@ -1,6 +1,6 @@
 "use client";
 
-import { Member, MemberRole, Profile, Server } from "@prisma/client";
+import { MemberRole } from "@prisma/client";
 import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
 import {
   DropdownMenu,
@@ -10,13 +10,10 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { DialogType, useDialog } from "@/hooks/use-dialog-store";
-
-export type ServerWithMembersWithProfiles = Server & {
-  members: (Member & { profile: Profile })[];
-};
+import { ServerWithMembersWithProfile } from "@/types";
 
 export type ServerHeaderProps = {
-  server: ServerWithMembersWithProfiles;
+  server: ServerWithMembersWithProfile;
   role: MemberRole;
 };
 
@@ -60,12 +57,12 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
           </DropdownMenuItem>
         )}
         {isAdmin && (
-          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            className="px-3 py-2 text-sm cursor-pointer"
+            onClick={() => openDialog(DialogType.SERVER_MANAGE_MEMBERS, { server })}
+          >
             Manage Members
-            <Users
-              className="h-4 w-4 ml-auto"
-              onClick={() => openDialog(DialogType.SERVER_MANAGE_MEMBERS, { server })}
-            />
+            <Users className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isModerator && (
