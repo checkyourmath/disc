@@ -38,7 +38,7 @@ const formSchema = z.object({
 });
 
 export const CreateServerDialog = () => {
-  const { dialogType, isDialogOpen, dialogClose } = useDialog();
+  const { dialogType, isDialogOpen, closeDialog } = useDialog();
   const router = useRouter();
 
   const form = useForm({
@@ -53,7 +53,7 @@ export const CreateServerDialog = () => {
 
   const handleOpenChange = () => {
     form.reset();
-    dialogClose();
+    closeDialog();
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -62,7 +62,7 @@ export const CreateServerDialog = () => {
 
       form.reset();
       router.refresh();
-      dialogClose();
+      closeDialog();
     } catch (error) {
       // TODO: handle error
       // console.log("error", error);
