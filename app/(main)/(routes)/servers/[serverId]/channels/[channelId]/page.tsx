@@ -9,12 +9,12 @@ import { ChatHeader } from "@/components/chat/chat-header";
 // import { MediaRoom } from "@/components/media-room";
 import { db } from "@/lib/db";
 
-interface ChannelIdPageProps {
+type ChannelIdPageProps = {
   params: {
     serverId: string;
     channelId: string;
   };
-}
+};
 
 const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
   const profile = await currentProfile();
@@ -45,6 +45,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
       <ChatHeader
         name={channel.name}
         serverId={channel.serverId}
+        channelType={channel.type}
         type="channel"
       />
       {/*{channel.type === ChannelType.TEXT && (*/}
