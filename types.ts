@@ -14,3 +14,5 @@ export type NextApiResponseServerIo = NextApiResponse & {
     };
   };
 };
+
+export type MessageQuery = { channelId: string; serverId: string } | { conversationId: string };

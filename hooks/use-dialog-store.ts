@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Channel, ChannelType } from "@prisma/client";
-import { ServerWithMembersWithProfile } from "@/types";
+import { MessageQuery, ServerWithMembersWithProfile } from "@/types";
 
 export enum DialogType {
   CREATE_SERVER = "create-server",
@@ -11,13 +11,16 @@ export enum DialogType {
   SERVER_DELETE = "server-delete",
   SERVER_LEAVE = "server-leave",
   CHANNEL_DELETE = "channel-delete",
-  CHANNEL_EDIT = "channel-edit"
+  CHANNEL_EDIT = "channel-edit",
+  MESSAGE_FILE = "message-file"
 }
 
 export type DialogData = {
   server?: ServerWithMembersWithProfile;
   channelType?: ChannelType;
   channel?: Channel;
+  apiUrl?: string;
+  query?: MessageQuery;
 };
 
 export type DialogStore = {
