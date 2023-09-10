@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { DialogType, useDialog } from "@/hooks/use-dialog-store";
 import { MessageQuery } from "@/types";
 import { EmojiPicker } from "@/components/emoji-picker";
+import { Button } from "@/components/ui/button";
 
 type ChatInputProps = {
   apiUrl: string;
@@ -84,6 +85,14 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                     placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
                     {...field}
                   />
+                  <Button
+                    disabled={isLoading}
+                    size="sm"
+                    variant="primary"
+                    className="absolute top-[22px] right-14 mr-4"
+                  >
+                    Send
+                  </Button>
                   <div className="absolute top-7 right-8">
                     <EmojiPicker
                       onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
