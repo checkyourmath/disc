@@ -5,9 +5,9 @@ import { ChannelType } from "@prisma/client";
 import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatInput } from "@/components/chat/chat-input";
-// import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
 import { db } from "@/lib/db";
+import { ChatMessages } from "@/components/chat/chat-messages";
 
 type ChannelIdPageProps = {
   params: {
@@ -50,21 +50,20 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
       />
       {channel.type === ChannelType.TEXT && (
         <>
-          <div className="flex-1">TODO</div>
-          {/*<ChatMessages*/}
-          {/*  member={member}*/}
-          {/*  name={channel.name}*/}
-          {/*  chatId={channel.id}*/}
-          {/*  type="channel"*/}
-          {/*  apiUrl="/api/messages"*/}
-          {/*  socketUrl="/api/socket/messages"*/}
-          {/*  socketQuery={{*/}
-          {/*    channelId: channel.id,*/}
-          {/*    serverId: channel.serverId,*/}
-          {/*  }}*/}
-          {/*  paramKey="channelId"*/}
-          {/*  paramValue={channel.id}*/}
-          {/*/>*/}
+          <ChatMessages
+            member={member}
+            name={channel.name}
+            chatId={channel.id}
+            type="channel"
+            apiUrl="/api/messages"
+            socketUrl="/api/socket/messages"
+            socketQuery={{
+              channelId: channel.id,
+              serverId: channel.serverId
+            }}
+            paramKey="channelId"
+            paramValue={channel.id}
+          />
           <ChatInput
             name={channel.name}
             type="channel"

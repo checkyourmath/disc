@@ -12,7 +12,8 @@ export enum DialogType {
   SERVER_LEAVE = "server-leave",
   CHANNEL_DELETE = "channel-delete",
   CHANNEL_EDIT = "channel-edit",
-  MESSAGE_FILE = "message-file"
+  MESSAGE_FILE = "message-file",
+  MESSAGE_DELETE = "message-delete"
 }
 
 export type DialogData = {
