@@ -9,7 +9,8 @@ import { Member, MemberRole, Profile } from "@prisma/client";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { ActionTooltip } from "@/components/action-tooltip";
@@ -60,16 +61,6 @@ export const ChatItem = ({
   const [isEditing, setIsEditing] = useState(false);
   const { openDialog } = useDialog();
   const params = useParams();
-  const router = useRouter();
-
-  const onMemberClick = () => {
-    if (member.id === currentMember.id) {
-      return;
-    }
-
-    // TODO: use link
-    router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
-  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent & { keyCode?: number }) => {
@@ -91,6 +82,7 @@ export const ChatItem = ({
   });
 
   const isLoading = form.formState.isSubmitting;
+  const memberUrl = `/servers/${params?.serverId}/conversations/${member.id}`;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -129,21 +121,21 @@ export const ChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div
-          onClick={onMemberClick}
+        <Link
           className="cursor-pointer hover:drop-shadow-md transition"
+          href={memberUrl}
         >
           <UserAvatar src={member.profile.imageUrl} />
-        </div>
+        </Link>
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
-              <p
-                onClick={onMemberClick}
+              <Link
                 className="font-semibold text-sm hover:underline cursor-pointer"
+                href={memberUrl}
               >
                 {member.profile.name}
-              </p>
+              </Link>
               <ActionTooltip label={member.role}>{roleIconMap[member.role]}</ActionTooltip>
             </div>
             <span className="text-xs text-zinc-500 dark:text-zinc-400">{timestamp}</span>

@@ -11,6 +11,7 @@ import { ServerDeleteDialog } from "@/components/dialogs/server-delete-dialog";
 import { ChannelDeleteDialog } from "@/components/dialogs/channel-delete-dialog";
 import { ChannelEditDialog } from "@/components/dialogs/channel-edit-dialog";
 import { MessageFileDialog } from "@/components/dialogs/message-file-dialog";
+import { MessageDeleteDialog } from "@/components/dialogs/message-delete-dialog";
 
 export const DialogProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -35,6 +36,7 @@ export const DialogProvider = () => {
       <ChannelDeleteDialog />
       <ChannelEditDialog />
       <MessageFileDialog />
+      <MessageDeleteDialog />
     </>
   );
 };
