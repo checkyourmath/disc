@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { LiveKitRoom, VideoConference } from "@livekit/components-react";
-// import "@livekit/components-styles";
+import { LiveKitRoom, VideoConference } from "@livekit/components-react";
+import "@livekit/components-styles";
 import { useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 
@@ -12,31 +12,28 @@ type MediaRoomProps = {
   audio: boolean;
 };
 
-export const MediaRoom = ({
-  chatId
-}: // video,
-// audio
-MediaRoomProps) => {
+export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
   const { user } = useUser();
-  const [token /* , setToken */] = useState("");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    // if (!user?.firstName || !user?.lastName) return;
-    //
-    // const name = `${user.firstName} ${user.lastName}`;
-    //
-    // void (async () => {
-    //   try {
-    //     const resp = await fetch(`/api/livekit?room=${chatId}&username=${name}`);
-    //     const data = await resp.json();
-    //     setToken(data.token);
-    //   } catch (e) {
-    //     // TODO: handle error
-    //
-    //     // eslint-disable-next-line no-console
-    //     console.log(e);
-    //   }
-    // })();
+    if (!user?.firstName || !user?.lastName) return;
+
+    const name = `${user.firstName} ${user.lastName}`.trim();
+
+    void (async () => {
+      try {
+        const resp = await fetch(`/api/livekit?room=${chatId}&username=${name}`);
+        const data = await resp.json();
+
+        setToken(data.token);
+      } catch (error) {
+        // TODO: handle error
+
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    })();
   }, [user?.firstName, user?.lastName, chatId]);
 
   if (token === "") {
@@ -49,16 +46,15 @@ MediaRoomProps) => {
   }
 
   return (
-    // <LiveKitRoom
-    //   data-lk-theme="default"
-    //   serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
-    //   token={token}
-    //   connect={true}
-    //   video={video}
-    //   audio={audio}
-    // >
-    //   <VideoConference />
-    // </LiveKitRoom>
-    <div>Media Room</div>
+    <LiveKitRoom
+      data-lk-theme="default"
+      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
+      token={token}
+      connect={true}
+      video={video}
+      audio={audio}
+    >
+      <VideoConference />
+    </LiveKitRoom>
   );
 };
